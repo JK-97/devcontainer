@@ -1,0 +1,18 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      # Bind mount — source code (host ↔ container sync)
+      - ../..:/workspace:cached
+      # Named volumes — overlay write-heavy paths for fast I/O
+      - devcontainer-node-modules:/workspace/node_modules
+      - devcontainer-go-modcache:/go/pkg/mod
+      - devcontainer-go-buildcache:/home/vscode/.cache/go-build
+    command: sleep infinity
+
+volumes:
+  devcontainer-node-modules:
+  devcontainer-go-modcache:
+  devcontainer-go-buildcache:

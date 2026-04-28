@@ -1,0 +1,100 @@
+{
+  "name": "devcontainer",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "devcontainer",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "ms-vscode.vscode-typescript-next",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens",
+        "github.copilot",
+        "github.copilot-chat",
+        "github.vscode-github-actions",
+        "tamasfe.even-better-toml",
+        "yzhang.markdown-all-in-one",
+        "bierner.markdown-mermaid",
+        "redhat.vscode-yaml",
+        "ms-vscode.makefile-tools",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[go]": {
+          "editor.defaultFormatter": "golang.go",
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+          }
+        },
+        "go.lintTool": "golangci-lint",
+        "go.lintOnSave": "package",
+        "go.useLanguageServer": true,
+        "go.toolsManagement.autoUpdate": true,
+        "gopls": {
+          "ui.semanticTokens": true,
+          "ui.completion.usePlaceholders": true
+        },
+        "typescript.updateImportsOnFileMove.enabled": "always",
+        "typescript.preferences.importModuleSpecifier": "relative",
+
+        // ── File watcher — exclude heavy dirs to keep SCM changes view responsive ──
+        "files.watcherExclude": {
+          "**/.git/objects/**": true,
+          "**/.git/subtree-cache/**": true,
+          "**/node_modules/**": true,
+          "**/vendor/**": true,
+          "**/dist/**": true,
+          "**/build/**": true,
+          "**/.cache/**": true,
+          "**/go/pkg/mod/**": true
+        },
+        "files.exclude": {
+          "**/.git": false
+        },
+
+        // ── Git — reduce status latency on large repos ──
+        "git.autorefresh": true,
+        "git.autofetch": true,
+        "git.confirmSync": false,
+        "git.untrackedChanges": "mixed",
+        "git.followTagsWhenSync": false,
+        "git.enableSmartCommit": true,
+
+        // ── Search — skip noise ──
+        "search.exclude": {
+          "**/node_modules": true,
+          "**/dist": true,
+          "**/build": true,
+          "**/go/pkg/mod": true,
+          "**/.git": true
+        },
+        "search.followSymlinks": false,
+
+        // ── General performance ──
+        "workbench.list.automaticKeyboardNavigation": false
+      }
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      "installOhMyZsh": true,
+      "installOhMyZshConfig": true,
+      "upgradePackages": true,
+      "username": "vscode",
+      "userUid": "1000",
+      "userGid": "1000"
+    }
+  },
+  "postCreateCommand": "cat /etc/os-release && go version && node --version && npm --version && echo '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━' && echo ' Devcontainer ready!' && echo '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'",
+  "remoteUser": "vscode"
+}
